@@ -1,3 +1,4 @@
+"""
 from django.contrib import admin
 
 # Register your models here.
@@ -57,3 +58,4 @@ class SubjectAdmin(admin.ModelAdmin):
 
 admin.site.register(Listing, ListingAdmin)
 admin.site.register(Subject, SubjectAdmin)
+"""

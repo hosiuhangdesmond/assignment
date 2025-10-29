@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
     'widget_tweaks',
+    'analytics.apps.AnalyticsConfig',
 ]
 
 MIDDLEWARE = [
