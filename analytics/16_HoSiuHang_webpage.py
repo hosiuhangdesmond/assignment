@@ -56,54 +56,47 @@ Steps:
     from django.contrib import admin
     from .models import Financial, Operation, Asset
 
-    admin.site.register(Financial)
-    admin.site.register(Operation)
-    admin.site.register(Asset)
-
-
-#05  and add admin actions.
-    
-
     class FinancialAdmin(admin.ModelAdmin):
-        actions = ['clear_records', 'format_records', 'export_records', 
-    'import_records']
-    def clear_records(self, request, queryset):
-    ...
-    def format_records(self, request, queryset):
-    ...
-    def export_records(self, request, queryset):
-    ...
-    def import_records(self, request, queryset):
-    ...
+        list_display = ('year_month', 'revenue_thousand', 'expenditure_thousand', 'profit_loss_thousand')
+        list_per_page = 25
 
     class OperationAdmin(admin.ModelAdmin):
-        actions = ['clear_records', 'format_records', 'export_records', 
-    'import_records']
-    def clear_records(self, request, queryset):
-    ...
-    def format_records(self, request, queryset):
-    ...
-    def export_records(self, request, queryset):
-    ...
-    def import_records(self, request, queryset):
-    ...
+        list_display = ('year_month_day', 'manager_name', 'phone_number')
+        list_per_page = 25
 
     class AssetAdmin(admin.ModelAdmin):
-        actions = ['clear_records', 'format_records', 'export_records', 
-    'import_records']
-    def clear_records(self, request, queryset):
-    ...
-    def format_records(self, request, queryset):
-    ...
-    def export_records(self, request, queryset):
-    ...
-    def import_records(self, request, queryset):
-    ...
+        list_display = ('description', 'purchase_year_month', 'cost_million', 'accu_depre_million', 'net_book_value_million')
+        list_per_page = 25
 
     admin.site.register(Financial, FinancialAdmin)
     admin.site.register(Operation, OperationAdmin)
     admin.site.register(Asset, AssetAdmin)
 
-#06 Handle external disk operations.
+#09 (DONE)Add "export data" function to built-in admin interface by including the code
+    below to assignment/analytics/admin.py:
+
+    import csv
+    from django.http import HttpResponse
+    def export_as_csv(modeladmin, request, queryset):
+        meta = modeladmin.model._meta
+        field_names = [field.name for field in meta.fields]
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = f'attachment; filename={meta}.csv'
+        writer = csv.writer(response)
+        writer.writerow(field_names)
+        for obj in queryset:
+            writer.writerow([getattr(obj, field) for field in field_names])
+        return response
+    export_as_csv.short_description = "Export Selected to CSV"
+    actions = [export_as_csv]
+
+#10 (DONE)Add "import data" function to built-in admin interface by:
+    (a) Creating a Simple CSV Upload Form
+    (b) Adding Import Logic to Admin Classes
+    (c) Extending Admin Classes with Import View
+    (d) Creating the Upload Form Template
+    (e) Adding Import Button to Admin Interface
+
+
 
 """
