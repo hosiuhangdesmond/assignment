@@ -97,6 +97,12 @@ Steps:
     (d) Creating the Upload Form Template
     (e) Adding Import Button to Admin Interface
 
+#11 (DONE)Format datasets. All tables are stored in Postgres database in formatted style.
+    All data exported from Postgres database are in CSV format.
 
+#12 (DONE)Clean raw data. By using Django, there is a built-in delete option:
+    "delete_selected.short_description = _("Delete selected %(verbose_name_plural)s")".
+    It is part of the internal source code of Django and is located in:
+    django/contrib/admin/actions.py
 
 """
