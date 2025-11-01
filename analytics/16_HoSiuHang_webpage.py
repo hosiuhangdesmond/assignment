@@ -11,7 +11,7 @@ Steps:
 
 #03 (DONE)Create a new database called assignment in Postgres by copying clinic.
 
-#04 (DONE)Create local & remote respositories of GitHub & establish the link.
+#04 (DONE)Create local & remote repositories of GitHub & establish the link.
         The remote repository is called assignment.  
 
 #05 (DONE)In assignment/analytics/models.py, define three databases below:
